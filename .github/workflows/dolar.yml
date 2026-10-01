@@ -1,9 +1,14 @@
 name: TESTE SCHEDULE
 
 on:
+  push:
+    branches:
+      - main
+
   schedule:
     - cron: "*/5 * * * *"
       timezone: "America/Sao_Paulo"
+
   workflow_dispatch:
 
 jobs:
@@ -11,14 +16,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Testar agendamento
+      - name: Identificar evento
         run: |
-          echo "================================"
-          echo "SCHEDULE FUNCIONOU!"
-          echo "================================"
-
-          echo "UTC:"
+          echo "EVENTO: ${{ github.event_name }}"
+          echo "HORARIO UTC:"
           date -u
-
-          echo "São Paulo:"
+          echo "HORARIO SAO PAULO:"
           TZ=America/Sao_Paulo date

@@ -1,12 +1,8 @@
 name: TESTE SCHEDULE
 
 on:
-  push:
-    branches:
-      - main
-
   schedule:
-    - cron: "*/5 * * * *"
+    - cron: "7,12,17,22,27,32,37,42,47,52,57 * * * *"
       timezone: "America/Sao_Paulo"
 
   workflow_dispatch:
@@ -18,8 +14,13 @@ jobs:
     steps:
       - name: Identificar evento
         run: |
+          echo "================================"
           echo "EVENTO: ${{ github.event_name }}"
+          echo "SCHEDULE: ${{ github.event.schedule }}"
+          echo "================================"
+
           echo "HORARIO UTC:"
           date -u
+
           echo "HORARIO SAO PAULO:"
           TZ=America/Sao_Paulo date
